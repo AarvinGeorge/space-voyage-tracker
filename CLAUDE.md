@@ -88,3 +88,60 @@ lastHorizonsUpdate: Date|null   // Wall-clock time of last successful HORIZONS p
 - Build: `npm run build`
 - Deploy: `vercel --prod`
 - Proxies configured in `api/` directory for Vercel deployment.
+
+---
+
+# v1 Multi-Mission Extension (Space Voyage Tracker)
+
+The v0 Artemis II tracker is now one of **25 curated missions** in a multi-mission
+3D solar system command center. The v0 Terminal Mission Control aesthetic and
+Artemis II behavior are preserved; the Artemis II HUD renders **only when Artemis
+II is the selected mission**. Planning docs:
+`../09_founders_inc_offseason/space-voyage-tracker/` (PRD, DESIGN.md, etc.).
+
+## Build-time data (zero runtime API calls)
+All mission data is generated at build time and committed. v1 makes **no runtime
+API calls** (v0's live JPL Horizons polling is deprecated for v1, reserved for v2).
+Scripts (run manually, locally — NOT chained into `build`):
+- `npm run fetch:missions` — validates the curated dataset (`src/data/missions.ts`)
+- `npm run fetch:trajectories` — bakes `src/data/missions/trajectories/<slug>.json` + resolves status
+- `npm run fetch:images` — Wikimedia Commons hero images → `public/missions/<slug>.webp`
+- `npm run generate:summaries` — Anthropic Claude SDK → `src/data/missions/summaries/<slug>.md`
+  (reads `ANTHROPIC_API_KEY` from `code/.env`; key is **local-only**, never committed, never on Vercel)
+
+## Mission data model
+- `src/data/missions.ts` — 25 `Mission` records (curated, committed). Add a 26th
+  mission by appending one record here; nothing else changes.
+- `src/data/types.ts` — `Mission`, `TrajectoryType`, `MilestoneEvent`, etc.
+- **Status is never hardcoded** (PRD F2.0). `src/lib/resolveStatus.ts` derives it
+  from `failureOutcome` / `partialOutcome` / `launchDate` / `primaryEndDate` /
+  `livelyTracked`. UI calls `getStatus(mission)`.
+- `src/data/missionsList.ts` — `getMissionById`, `getMissionsByAgency`, `getStatus`, agency order/labels.
+- `src/data/summaries.ts` — loads committed `.md` summaries via `import.meta.glob` (raw); graceful when absent.
+
+## Store additions (`missionStore.ts`)
+v0 fields are unchanged (`currentMissionTime` stays index-based for Artemis).
+Added: `selectedMissionId`, `missions`, `hoveredMissionId`, `viewMode`
+(`EARTH_SYSTEM | HELIOCENTRIC`), `cardState` (`FULL | TAG | DISMISSED`),
+`cardPosition`, `sidebarCollapsed`, `searchQuery`, `missionT` (normalized 0-1
+timeline position), `timelinePlaying`, `playbackSpeed`. Actions: `selectMission`,
+`closeMissionCard`, `setMissionT`, `toggleTimelinePlay`, `cycleSpeed`, etc.
+Initial mission is read synchronously from `?mission=<slug>` (deep-link).
+
+## 3D layers
+- `src/lib/solarSystem.ts` — shared body positions/radii (earth-system + log-compressed heliocentric).
+- `src/lib/trajectories/` — 13 archetype generators + `index.ts` (prefers committed JSON, else computes; Artemis defers to `missionCurve`).
+- `src/components/SolarSystem/` — polyhedral Sun/planets/belt, Titan/67P/Ryugu, L2, Kármán, CameraRig.
+- `src/components/Trajectories/TrajectoryArchetype.tsx` — Option B white opacity-ramp path + chevron.
+- `SceneCanvas.tsx` renders the **v0 Artemis scene only for `artemis-2`**; all other missions use `SolarSystem` + `TrajectoryArchetype` + `CameraRig`.
+
+## UI shell
+- `TopBar/`, `Footer/PageFooter` (locked disclosure text), `MissionSidebar/`
+  (agency-grouped, A+B active state, search, collapse), `MissionCard/` (FULL/TAG/
+  DISMISSED, draggable), `Timeline/MissionTimeline` (replaces v0 `PhaseScrubber`,
+  which is deprecated and not rendered), `hooks/useMissionUrlHash.ts`.
+
+## Stack additions
+Tailwind v4 (`@tailwindcss/vite`) + shadcn/ui (button/input/scroll-area/collapsible/sheet)
+mapped to DESIGN.md tokens, Framer Motion, lucide-react, JetBrains Mono + Inter
+(`@fontsource`). Build-only: `@anthropic-ai/sdk`, `sharp`, `tsx`, `dotenv`.

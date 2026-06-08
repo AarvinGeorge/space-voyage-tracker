@@ -11,6 +11,16 @@ export type PlaybackSpeed = 1 | 2 | 5 | 10 | 50
 // Default selected mission on a cold load with no URL hash (founder pick).
 export const DEFAULT_MISSION_ID = 'apollo-11'
 
+// Resolve the initial mission synchronously from the URL (?mission=slug) so a
+// deep-link is honoured on first render — no effect race.
+function readInitialMissionId(): string {
+  if (typeof window === 'undefined') return DEFAULT_MISSION_ID
+  const p = new URLSearchParams(window.location.search).get('mission')
+  return p && getMissionById(p) ? p : DEFAULT_MISSION_ID
+}
+const INITIAL_MISSION_ID = readInitialMissionId()
+const INITIAL_MISSION = getMissionById(INITIAL_MISSION_ID)
+
 // Bridge the new normalized timeline (0-1) to v0's index-based Artemis time.
 export function tToArtemisIdx(t: number): number {
   return Math.round(t * (LAST + LAUNCH_N) - LAUNCH_N)
@@ -115,16 +125,16 @@ export const useMissionStore = create<MissionState>((set, get) => ({
 
   // ── v1 multi-mission initial state (URL-hash hook may override on mount) ──
   missions:           MISSIONS,
-  selectedMissionId:  DEFAULT_MISSION_ID,
+  selectedMissionId:  INITIAL_MISSION_ID,
   hoveredMissionId:   null,
-  viewMode:           (getMissionById(DEFAULT_MISSION_ID)?.viewMode ?? 'EARTH_SYSTEM'),
+  viewMode:           (INITIAL_MISSION?.viewMode ?? 'EARTH_SYSTEM'),
   cardState:          'FULL',
   cardPosition:       null,
   sidebarCollapsed:   false,
   searchQuery:        '',
   missionT:           0,
   timelinePlaying:    false,
-  playbackSpeed:      (getMissionById(DEFAULT_MISSION_ID)?.defaultSpeed ?? 1),
+  playbackSpeed:      (INITIAL_MISSION?.defaultSpeed ?? 1),
 
   selectMission: (id) => {
     const mission = getMissionById(id)

@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fetch:missions": "tsx scripts/fetch_missions.ts",
+    "fetch:trajectories": "tsx scripts/fetch_trajectories.ts",
+    "fetch:images": "tsx scripts/fetch_hero_images.ts",
+    "generate:summaries": "tsx scripts/generate_summaries.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.102.0",

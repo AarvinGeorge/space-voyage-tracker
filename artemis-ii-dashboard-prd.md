@@ -1,3 +1,5 @@
+> This is the **v0 PRD** (single-mission Artemis II tracker). For the v1 multi-mission extension, see `../09_founders_inc_offseason/space-voyage-tracker/01_prd_space_voyage_tracker_v1_2026-06-07.md`.
+
 # Product Requirements Document (PRD)
 ## Artemis II "Integrity" Interactive Mission Dashboard
 
