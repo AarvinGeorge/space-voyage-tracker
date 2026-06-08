@@ -3,7 +3,11 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, Line, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import { useMissionStore } from '../store/missionStore'
+import { getMissionById } from '../data/missionsList'
 import OrionModel from './OrionModel'
+import SolarSystem from './SolarSystem/SolarSystem'
+import CameraRig from './SolarSystem/CameraRig'
+import TrajectoryArchetype from './Trajectories/TrajectoryArchetype'
 import {
   missionCurve, idxToT,
   EARTH_R, MOON_R, MOON_POS,
@@ -453,6 +457,9 @@ export default function SceneCanvas() {
   const animatingRef = useRef(false)
   const skipNextAnimRef = useRef(false)
   const { controlMode, cameraMode } = useMissionStore()
+  const selectedMissionId = useMissionStore((s) => s.selectedMissionId)
+  const isArtemis = selectedMissionId === 'artemis-2'
+  const selectedMission = getMissionById(selectedMissionId)
 
   const cursorStyle = controlMode === 'pan' ? 'grab' : 'auto'
 
@@ -472,36 +479,48 @@ export default function SceneCanvas() {
       gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
       style={{ position: 'absolute', inset: 0, background: '#000', cursor: cursorStyle, zIndex: 0 }}
     >
-      <ambientLight intensity={0.05} />
+      {/* Artemis keeps its exact v0 lighting; new scenes get a touch more ambient. */}
+      <ambientLight intensity={isArtemis ? 0.05 : 0.18} />
       <directionalLight position={SUN_POS.toArray()} intensity={2.2} color="#fff8e7" />
       <Starfield />
-      <Sun />
-      <RangeRings />
-      <Earth />
-      <TrajectoryLine />
 
-      <Suspense fallback={<group />}>
-        <OrionModel />
-      </Suspense>
-
-      <CameraController controlsRef={controlsRef} animatingRef={animatingRef} skipNextAnimRef={skipNextAnimRef} />
-      <OrbitControls
-        ref={controlsRef as React.MutableRefObject<any>}
-        enablePan
-        enableZoom
-        enableRotate
-        mouseButtons={{
-           LEFT: controlMode === 'pan' ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE,
-           MIDDLE: THREE.MOUSE.DOLLY,
-           RIGHT: THREE.MOUSE.PAN,
-        }}
-        touches={{
-          ONE: controlMode === 'pan' ? THREE.TOUCH.PAN : THREE.TOUCH.ROTATE,
-          TWO: THREE.TOUCH.DOLLY_PAN,
-        }}
-        minDistance={ZOOM_MIN_DIST}
-        maxDistance={ZOOM_MAX_DIST}
-      />
+      {isArtemis ? (
+        // ── Artemis II: v0 scene preserved unchanged ──
+        <>
+          <Sun />
+          <RangeRings />
+          <Earth />
+          <TrajectoryLine />
+          <Suspense fallback={<group />}>
+            <OrionModel />
+          </Suspense>
+          <CameraController controlsRef={controlsRef} animatingRef={animatingRef} skipNextAnimRef={skipNextAnimRef} />
+          <OrbitControls
+            ref={controlsRef as React.MutableRefObject<any>}
+            enablePan
+            enableZoom
+            enableRotate
+            mouseButtons={{
+              LEFT: controlMode === 'pan' ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE,
+              MIDDLE: THREE.MOUSE.DOLLY,
+              RIGHT: THREE.MOUSE.PAN,
+            }}
+            touches={{
+              ONE: controlMode === 'pan' ? THREE.TOUCH.PAN : THREE.TOUCH.ROTATE,
+              TWO: THREE.TOUCH.DOLLY_PAN,
+            }}
+            minDistance={ZOOM_MIN_DIST}
+            maxDistance={ZOOM_MAX_DIST}
+          />
+        </>
+      ) : selectedMission ? (
+        // ── All other 24 missions: solar system + archetype trajectory ──
+        <>
+          <SolarSystem mission={selectedMission} />
+          <TrajectoryArchetype mission={selectedMission} />
+          <CameraRig mission={selectedMission} />
+        </>
+      ) : null}
     </Canvas>
   )
 }

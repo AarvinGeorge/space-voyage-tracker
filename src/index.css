@@ -1,11 +1,143 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ─────────────────────────────────────────────────────────────────────────
+   DESIGN.md — Terminal Mission Control tokens (source of truth)
+   Generated from code_design_references/tailwind_theme_preview.css,
+   with font-stack quoting corrected for valid CSS.
+   ───────────────────────────────────────────────────────────────────────── */
+@theme {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-live-red: #ff3333;
+  --color-grey-1: #0a0a0a;
+  --color-grey-2: #141414;
+  --color-grey-3: #1f1f1f;
+  --color-grey-4: #2a2a2a;
+  --color-grey-5: #3d3d3d;
+  --color-grey-6: #5c5c5c;
+  --color-grey-7: #8a8a8a;
+  --color-grey-8: #b5b5b5;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b5b5b5;
+  --color-text-muted: #5c5c5c;
+  --color-background: #000000;
+  --color-surface: #0a0a0a;
+  --color-surface-elevated: #141414;
+  --color-surface-overlay: #1f1f1f;
+  --color-border: #2a2a2a;
+  --color-border-strong: #3d3d3d;
+  --color-status-success: #5cd68c;
+  --color-status-partial: #ffb347;
+  --color-status-failure: #ff6b6b;
+  --color-status-ongoing: #3399ff;
+  --color-trajectory-start: #ffffff;
+  --color-trajectory-end: #ffffff;
+  --color-trajectory-dimmed-ahead: #5c5c5c;
+  --color-trajectory-end-legacy-red: #ff3333;
+  --color-scrubber-pin: #ffffff;
+  --color-scrubber-track-bg: #2a2a2a;
+  --color-scrubber-track-dimmed: #5c5c5c;
+
+  --font-display-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-heading-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-body-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-body-prose: "Inter", ui-sans-serif, system-ui;
+  --font-caption-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-label-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --text-display-mono: 1.5rem;
+  --text-heading-mono: 1.125rem;
+  --text-body-mono: 0.875rem;
+  --text-body-prose: 0.9375rem;
+  --text-caption-mono: 0.6875rem;
+  --text-label-mono: 0.75rem;
+
+  --tracking-display-mono: 0.08em;
+  --tracking-heading-mono: 0.08em;
+  --tracking-body-mono: 0.02em;
+  --tracking-body-prose: 0em;
+  --tracking-caption-mono: 0.12em;
+  --tracking-label-mono: 0.1em;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-xxl: 32px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   shadcn/ui semantic tokens → mapped to DESIGN.md palette (DESIGN.md §shadcn)
+   ───────────────────────────────────────────────────────────────────────── */
+:root {
+  --radius: 2px;
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #0a0a0a;
+  --card-foreground: #ffffff;
+  --popover: #0a0a0a;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: #0a0a0a;
+  --secondary-foreground: #ffffff;
+  --muted: #141414;
+  --muted-foreground: #b5b5b5;
+  --accent: #ff3333;
+  --accent-foreground: #ffffff;
+  --destructive: #ff6b6b;
+  --destructive-foreground: #ffffff;
+  --border: #2a2a2a;
+  --input: #2a2a2a;
+  --ring: #ff3333;
+}
+
+@theme inline {
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-shadcn: var(--radius);
+}
+
+/* Default border color for shadcn primitives (width stays 0 unless set,
+   so this does not add visible borders to existing v0 components). */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   v0 base reset + fluid sizing + LIVE pulse — preserved unchanged
+   ───────────────────────────────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html { 
-  font-size: calc(0.625rem + 0.41666666666666663vw); 
+html {
+  font-size: calc(0.625rem + 0.41666666666666663vw);
 }
 @media screen and (max-width:1920px) { html { font-size: calc(0.625rem + 0.41666666666666674vw); } }
 @media screen and (max-width:1440px) { html { font-size: calc(0.8126951092611863rem + 0.20811654526534862vw); } }

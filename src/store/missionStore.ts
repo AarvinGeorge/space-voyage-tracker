@@ -1,6 +1,20 @@
 import { create } from 'zustand'
 import trajectoryData from '../data/trajectory.json'
-import { LAUNCH_N, LAUNCH_TIME_MS } from '../data/missionCurve'
+import { LAUNCH_N, LAUNCH_TIME_MS, LAST } from '../data/missionCurve'
+import type { Mission, ViewMode } from '../data/types'
+import { MISSIONS, getMissionById } from '../data/missionsList'
+
+// ── v1 multi-mission additions ──
+export type CardState = 'FULL' | 'TAG' | 'DISMISSED'
+export type PlaybackSpeed = 1 | 2 | 5 | 10 | 50
+
+// Default selected mission on a cold load with no URL hash (founder pick).
+export const DEFAULT_MISSION_ID = 'apollo-11'
+
+// Bridge the new normalized timeline (0-1) to v0's index-based Artemis time.
+export function tToArtemisIdx(t: number): number {
+  return Math.round(t * (LAST + LAUNCH_N) - LAUNCH_N)
+}
 
 export interface StateVector {
   timestamp: string
@@ -31,6 +45,33 @@ interface MissionState {
   controlMode: 'pan' | 'rotate'
   zoomLevel: number
   mobileDrawerOpen: boolean
+
+  // ── v1 multi-mission state ──
+  missions: Mission[]
+  selectedMissionId: string | null
+  hoveredMissionId: string | null
+  viewMode: ViewMode                 // active solar-system view (auto-set on select; toggleable)
+  cardState: CardState
+  cardPosition: { x: number; y: number } | null
+  sidebarCollapsed: boolean
+  searchQuery: string
+  missionT: number                   // normalized 0-1 scrubber position for the selected mission
+  timelinePlaying: boolean
+  playbackSpeed: PlaybackSpeed
+
+  selectMission:   (id: string) => void
+  closeMissionCard:() => void
+  setCardState:    (s: CardState) => void
+  setCardPosition: (p: { x: number; y: number } | null) => void
+  setHoveredMission: (id: string | null) => void
+  setViewMode:     (m: ViewMode) => void
+  setSidebarCollapsed: (c: boolean) => void
+  setSearchQuery:  (q: string) => void
+  setMissionT:     (t: number) => void
+  toggleTimelinePlay: () => void
+  setTimelinePlaying: (p: boolean) => void
+  cycleSpeed:      () => void
+  resetTimeline:   () => void
 
   setMissionTime:  (index: number) => void
   setIsPlaying:    (playing: boolean) => void
@@ -71,6 +112,68 @@ export const useMissionStore = create<MissionState>((set, get) => ({
   controlMode:        'rotate',
   zoomLevel:          50,
   mobileDrawerOpen:   false,
+
+  // ── v1 multi-mission initial state (URL-hash hook may override on mount) ──
+  missions:           MISSIONS,
+  selectedMissionId:  DEFAULT_MISSION_ID,
+  hoveredMissionId:   null,
+  viewMode:           (getMissionById(DEFAULT_MISSION_ID)?.viewMode ?? 'EARTH_SYSTEM'),
+  cardState:          'FULL',
+  cardPosition:       null,
+  sidebarCollapsed:   false,
+  searchQuery:        '',
+  missionT:           0,
+  timelinePlaying:    false,
+  playbackSpeed:      (getMissionById(DEFAULT_MISSION_ID)?.defaultSpeed ?? 1),
+
+  selectMission: (id) => {
+    const mission = getMissionById(id)
+    if (!mission) return
+    set({
+      selectedMissionId: id,
+      viewMode: mission.viewMode,
+      cardState: 'FULL',
+      cardPosition: null,
+      missionT: 0,
+      timelinePlaying: false,
+      playbackSpeed: mission.defaultSpeed,
+    })
+    // For Artemis II, drive v0 index-based time so the preserved HUD reflects t=0.
+    if (id === 'artemis-2') get().setMissionTime(tToArtemisIdx(0))
+  },
+
+  closeMissionCard: () => set({ cardState: 'DISMISSED', timelinePlaying: false }),
+  setCardState: (s) => set({ cardState: s }),
+  setCardPosition: (p) => set({ cardPosition: p }),
+  setHoveredMission: (id) => set({ hoveredMissionId: id }),
+  setViewMode: (m) => set({ viewMode: m }),
+  setSidebarCollapsed: (c) => set({ sidebarCollapsed: c }),
+  setSearchQuery: (q) => set({ searchQuery: q }),
+
+  setMissionT: (t) => {
+    const clamped = Math.max(0, Math.min(1, t))
+    set({ missionT: clamped })
+    if (get().selectedMissionId === 'artemis-2') get().setMissionTime(tToArtemisIdx(clamped))
+  },
+
+  toggleTimelinePlay: () => {
+    const { missionT, timelinePlaying } = get()
+    // Restart from 0 if at the end.
+    if (!timelinePlaying && missionT >= 0.999) get().setMissionT(0)
+    set({ timelinePlaying: !get().timelinePlaying })
+  },
+  setTimelinePlaying: (p) => set({ timelinePlaying: p }),
+
+  cycleSpeed: () => {
+    const order: PlaybackSpeed[] = [1, 2, 5, 10, 50]
+    const idx = order.indexOf(get().playbackSpeed)
+    set({ playbackSpeed: order[(idx + 1) % order.length] })
+  },
+
+  resetTimeline: () => {
+    set({ missionT: 0, timelinePlaying: false })
+    if (get().selectedMissionId === 'artemis-2') get().setMissionTime(tToArtemisIdx(0))
+  },
 
   setMissionTime: (index) => {
     const realIdx = get().getRealTimeIndex()
