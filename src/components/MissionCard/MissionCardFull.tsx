@@ -26,7 +26,7 @@ export default function MissionCardFull({
       {/* Header strip */}
       <div
         onPointerDown={onHeaderPointerDown}
-        className="flex shrink-0 cursor-grab items-center gap-2 bg-surface-elevated px-3 py-2 active:cursor-grabbing"
+        className="flex h-12 shrink-0 cursor-grab items-center gap-2 bg-surface-elevated px-3 active:cursor-grabbing"
       >
         <GripVertical size={14} className="shrink-0 text-text-muted" />
         <span className="rounded-sm border border-border px-1.5 py-0.5 font-caption-mono text-[9px] tracking-[0.1em] text-text-secondary">

@@ -21,6 +21,13 @@ function readInitialMissionId(): string {
 const INITIAL_MISSION_ID = readInitialMissionId()
 const INITIAL_MISSION = getMissionById(INITIAL_MISSION_ID)
 
+// Mobile opens a selected mission as the compact TAG chip (so the 3D scene stays
+// visible); desktop opens the FULL card. Matches the Frame 7 mobile spec.
+function defaultCardStateForViewport(): CardState {
+  if (typeof window === 'undefined') return 'FULL'
+  return window.innerWidth < 640 ? 'TAG' : 'FULL'
+}
+
 // Bridge the new normalized timeline (0-1) to v0's index-based Artemis time.
 export function tToArtemisIdx(t: number): number {
   return Math.round(t * (LAST + LAUNCH_N) - LAUNCH_N)
@@ -128,7 +135,7 @@ export const useMissionStore = create<MissionState>((set, get) => ({
   selectedMissionId:  INITIAL_MISSION_ID,
   hoveredMissionId:   null,
   viewMode:           (INITIAL_MISSION?.viewMode ?? 'EARTH_SYSTEM'),
-  cardState:          'FULL',
+  cardState:          defaultCardStateForViewport(),
   cardPosition:       null,
   sidebarCollapsed:   false,
   searchQuery:        '',
@@ -142,7 +149,7 @@ export const useMissionStore = create<MissionState>((set, get) => ({
     set({
       selectedMissionId: id,
       viewMode: mission.viewMode,
-      cardState: 'FULL',
+      cardState: defaultCardStateForViewport(),
       cardPosition: null,
       missionT: 0,
       timelinePlaying: false,

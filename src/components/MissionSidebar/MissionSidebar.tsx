@@ -91,8 +91,8 @@ export default function MissionSidebar({
         mobile ? 'w-full' : 'w-[280px] shrink-0 border-r border-border-strong',
       )}
     >
-      <div className="flex items-center justify-between bg-surface-elevated px-3 py-2">
-        <span className="font-caption-mono text-caption-mono tracking-[0.12em] text-text-primary">
+      <div className="flex h-12 shrink-0 items-center justify-between bg-surface-elevated px-4">
+        <span className="font-caption-mono text-[11px] tracking-[0.12em] text-text-primary">
           MISSIONS BY AGENCY
         </span>
         {!mobile && (

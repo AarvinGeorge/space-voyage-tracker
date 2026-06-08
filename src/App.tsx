@@ -8,6 +8,7 @@ import MissionCard from './components/MissionCard/MissionCard'
 import MissionTimeline from './components/Timeline/MissionTimeline'
 import ArtemisHUD from './components/HUD/ArtemisHUD'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from './components/ui/sheet'
+import ViewModeToggle from './components/TopBar/ViewModeToggle'
 import { useMissionStore } from './store/missionStore'
 import { useMissionUrlHash } from './hooks/useMissionUrlHash'
 import { useIsMobile } from './hooks/useIsMobile'
@@ -68,12 +69,23 @@ export default function App() {
 
       <PageFooter />
 
-      {/* Mobile mission sidebar as a slide-in sheet (PRD F7). */}
+      {/* Mobile mission sidebar as a bottom slide-up drawer (Frame 7). */}
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-        <SheetContent side="left" className="w-[300px] max-w-[85vw] p-0">
+        <SheetContent
+          side="bottom"
+          className="flex h-[74vh] flex-col gap-0 rounded-t-lg p-0"
+        >
           <SheetHeader className="sr-only">
             <SheetTitle>Missions by agency</SheetTitle>
           </SheetHeader>
+          {/* drag handle */}
+          <div className="flex shrink-0 justify-center py-2">
+            <span className="h-1 w-10 rounded-full bg-border-strong" />
+          </div>
+          {/* view-mode toggle moved here from the top bar on mobile */}
+          <div className="shrink-0 border-b border-border px-4 pb-3">
+            <ViewModeToggle fullWidth />
+          </div>
           <MissionSidebar mobile onMissionSelected={() => setSheetOpen(false)} />
         </SheetContent>
       </Sheet>
