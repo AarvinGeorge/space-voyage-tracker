@@ -28,3 +28,6 @@ dist-ssr
 
 # Build-time API key (never commit)
 .env
+
+# Claude Code per-user config (never commit)
+.claude/
