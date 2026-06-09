@@ -34,9 +34,9 @@ export default function MissionRow({
       {/* A: 3px white left bar (active only) */}
       {active && <span className="absolute left-0 top-0 h-8 w-[3px] bg-white" />}
 
-      {/* B: ▸ caret (active only) */}
+      {/* B: ▸ caret (active only) — vertically centred, clear of the 3px bar */}
       {active && (
-        <span className="absolute left-[12px] font-body-mono text-[12px] font-semibold leading-none text-white">
+        <span className="pointer-events-none absolute left-[13px] top-1/2 -translate-y-1/2 font-body-mono text-[12px] font-semibold leading-none text-white">
           ▸
         </span>
       )}

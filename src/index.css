@@ -89,13 +89,13 @@
   --secondary-foreground: #ffffff;
   --muted: #141414;
   --muted-foreground: #b5b5b5;
-  --accent: #ff3333;
-  --accent-foreground: #ffffff;
+  --accent: #ffffff;
+  --accent-foreground: #000000;
   --destructive: #ff6b6b;
   --destructive-foreground: #ffffff;
   --border: #2a2a2a;
   --input: #2a2a2a;
-  --ring: #ff3333;
+  --ring: #5c5c5c;
 }
 
 @theme inline {

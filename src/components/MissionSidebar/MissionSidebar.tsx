@@ -6,6 +6,7 @@ import {
   AGENCY_ORDER,
   AGENCY_LABELS,
   DEFAULT_EXPANDED_AGENCIES,
+  MISSION_COUNT,
   getMissionsByAgency,
 } from '@/data/missionsList'
 import type { AgencyCode } from '@/data/types'
@@ -52,6 +53,9 @@ export default function MissionSidebar({
       .filter((g) => g.missions.length > 0)
   }, [groups, q])
 
+  // M1: header count — filtered count while searching, else the full 25.
+  const totalCount = q ? filtered.reduce((n, g) => n + g.missions.length, 0) : MISSION_COUNT
+
   const handleSelect = (id: string) => {
     selectMission(id)
     onMissionSelected?.()
@@ -91,9 +95,9 @@ export default function MissionSidebar({
         mobile ? 'w-full' : 'w-[280px] shrink-0 border-r border-border-strong',
       )}
     >
-      <div className="flex h-12 shrink-0 items-center justify-between bg-surface-elevated px-4">
+      <div className="flex h-10 shrink-0 items-center justify-between bg-surface-elevated px-4">
         <span className="font-caption-mono text-[11px] tracking-[0.12em] text-text-primary">
-          MISSIONS BY AGENCY
+          MISSIONS BY AGENCY · {totalCount}
         </span>
         {!mobile && (
           <button

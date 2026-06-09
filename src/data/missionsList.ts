@@ -2,6 +2,9 @@ import type { AgencyCode, Mission, MissionStatus } from './types'
 import { MISSIONS } from './missions'
 import { resolveStatus } from '@/lib/resolveStatus'
 
+// Total curated mission count (sidebar header · N).
+export const MISSION_COUNT = MISSIONS.length
+
 // Sidebar agency order — by mission count, per PRD §4 (Sidebar).
 export const AGENCY_ORDER: AgencyCode[] = [
   'NASA',
