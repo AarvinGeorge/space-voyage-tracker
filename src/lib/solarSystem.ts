@@ -18,8 +18,9 @@ export const EARTH_R = 6.371
 export const MOON_R = 1.737
 export const KARMAN_R = EARTH_R + 0.12 // ~100 km above the surface, exaggerated to read
 // Generic Moon position for non-Artemis lunar missions (Artemis uses its OEM
-// Moon). Compressed from the true ~384 units so Earth + arc frame together.
-export const MOON_POS = new THREE.Vector3(26, 18, -150)
+// Moon). Compressed well below the true ~384 units (v1.2 H1) so Earth + Moon
+// frame together and occupy meaningful canvas, not a tiny dot at the far edge.
+export const MOON_POS = new THREE.Vector3(12, 10, -44)
 // Sun direction for the earth-system view (matches v0 SUN_POS direction).
 export const SUN_DIR_EARTH = new THREE.Vector3(3000, 600, -1000).normalize()
 // Sun-Earth L2 marker: anti-sun side of Earth, compressed to a readable distance.

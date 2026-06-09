@@ -7,6 +7,7 @@ import { MISSIONS, getMissionById } from '../data/missionsList'
 // ── v1 multi-mission additions ──
 export type CardState = 'FULL' | 'TAG' | 'DISMISSED'
 export type PlaybackSpeed = 1 | 2 | 5 | 10 | 50
+export type HudCameraMode = 'PERSPECTIVE' | 'TOP_DOWN' | 'FREE'
 
 // Default selected mission on a cold load with no URL hash (founder pick).
 export const DEFAULT_MISSION_ID = 'apollo-11'
@@ -76,6 +77,12 @@ interface MissionState {
   timelinePlaying: boolean
   playbackSpeed: PlaybackSpeed
 
+  // ── v1.2 HUD chips (H3) ──
+  cameraDistance: number             // camera→origin distance, reported from the scene for ScaleChip
+  hudCameraMode: HudCameraMode       // PERSPECTIVE | TOP_DOWN | FREE (CameraChip)
+  setCameraDistance: (d: number) => void
+  cycleHudCameraMode: () => void
+
   selectMission:   (id: string) => void
   closeMissionCard:() => void
   setCardState:    (s: CardState) => void
@@ -142,6 +149,20 @@ export const useMissionStore = create<MissionState>((set, get) => ({
   missionT:           0,
   timelinePlaying:    false,
   playbackSpeed:      (INITIAL_MISSION?.defaultSpeed ?? 1),
+  cameraDistance:     60,
+  hudCameraMode:      'PERSPECTIVE',
+
+  setCameraDistance: (d) => {
+    // Throttle churn: only update when it moves meaningfully.
+    if (Math.abs(d - get().cameraDistance) > Math.max(0.5, get().cameraDistance * 0.01)) {
+      set({ cameraDistance: d })
+    }
+  },
+  cycleHudCameraMode: () => {
+    const order: HudCameraMode[] = ['PERSPECTIVE', 'TOP_DOWN', 'FREE']
+    const idx = order.indexOf(get().hudCameraMode)
+    set({ hudCameraMode: order[(idx + 1) % order.length] })
+  },
 
   selectMission: (id) => {
     const mission = getMissionById(id)

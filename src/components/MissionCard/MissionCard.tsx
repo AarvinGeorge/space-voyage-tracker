@@ -114,7 +114,7 @@ export default function MissionCard() {
       dragListener={false}
       dragControls={dragControls}
       dragMomentum={false}
-      className="pointer-events-auto absolute right-8 top-6 z-30"
+      className="pointer-events-auto absolute right-8 top-20 z-30"
     >
       <AnimatePresence mode="wait">
         <motion.div

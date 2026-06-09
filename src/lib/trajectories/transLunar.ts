@@ -6,9 +6,10 @@ import { EARTH_R, MOON_R, MOON_POS } from '@/lib/solarSystem'
 function transLunarArc(samples = 150): THREE.Vector3[] {
   const start = new THREE.Vector3(0, EARTH_R + 1.5, EARTH_R + 1.5)
   const end = MOON_POS.clone()
-  // Control points bow the arc up-and-over (free-return character).
-  const c1 = new THREE.Vector3(EARTH_R * 4, EARTH_R * 6, -55)
-  const c2 = new THREE.Vector3(MOON_POS.x - 18, MOON_POS.y + 38, MOON_POS.z + 48)
+  // Control points bow the arc up-and-over (free-return character), tuned for the
+  // compressed Earth-Moon distance (v1.2 H1).
+  const c1 = new THREE.Vector3(EARTH_R * 2, EARTH_R * 3.4, -16)
+  const c2 = new THREE.Vector3(MOON_POS.x - 8, MOON_POS.y + 16, MOON_POS.z + 16)
   const curve = new THREE.CubicBezierCurve3(start, c1, c2, end)
   return curve.getPoints(samples)
 }

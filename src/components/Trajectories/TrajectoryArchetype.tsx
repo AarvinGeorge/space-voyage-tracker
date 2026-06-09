@@ -1,21 +1,43 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
+import { Line } from '@react-three/drei'
 import * as THREE from 'three'
-import type { Mission } from '@/data/types'
+import type { Mission, TrajectoryType } from '@/data/types'
 import { getTrajectoryPoints, getTrajectoryCurve } from '@/lib/trajectories'
 import { useMissionStore } from '@/store/missionStore'
 
 // Renders the selected mission's archetype trajectory with the locked Option B
-// path treatment (PRD F8.1): pure white with an opacity ramp 0.3 → 1.0 along
-// the flown portion, #5C5C5C for the portion ahead of the scrubber. On black,
-// luminance == perceived opacity, so the ramp is encoded as vertex luminance.
-// Plus a 1.5s animated draw-in and a spacecraft chevron + white endpoint glow.
+// path treatment (PRD F8.1): pure white with a luminance ramp 0.3 → 1.0 along
+// the flown portion, #5C5C5C ahead of the scrubber. On black, luminance ==
+// perceived opacity. v1.2 H1: uses drei <Line> (fat lines) so lineWidth=2.5
+// actually renders — native <line> caps at 1px and reads as empty. Draw-in is
+// done via per-vertex colour (un-revealed = black = invisible on black).
 
 const DIM = 0.36 // #5C5C5C ≈ 0.36 luminance — the "ahead" colour
 const DRAW_MS = 1500
 
 function easeOutCubic(x: number) {
   return 1 - Math.pow(1 - x, 3)
+}
+
+// v1.2 H1: glyph scale per archetype so the chevron reads at each archetype's
+// natural camera distance.
+function glyphScaleFor(arch: TrajectoryType): number {
+  switch (arch) {
+    case 'HOHMANN_MARS':
+    case 'HOHMANN_VENUS':
+      return 2.5 // inner solar system, framed mid-distance
+    case 'GRAVITY_ASSIST_OUTER':
+    case 'INTERSTELLAR':
+    case 'COMET_RENDEZVOUS':
+    case 'ASTEROID_RENDEZVOUS':
+    case 'HYPERBOLIC_ESCAPE':
+      return 1.0 // outer heliocentric, framed far
+    case 'BALLISTIC_SUBORBITAL':
+      return 1.5
+    default:
+      return 2.0 // LEO / lunar / L2 earth-system
+  }
 }
 
 export default function TrajectoryArchetype({ mission }: { mission: Mission }) {
@@ -27,30 +49,19 @@ export default function TrajectoryArchetype({ mission }: { mission: Mission }) {
   const points = useMemo(() => getTrajectoryPoints(mission), [mission.id])
   const curve = useMemo(() => getTrajectoryCurve(mission), [mission.id])
 
-  const positions = useMemo(() => {
-    const arr = new Float32Array(points.length * 3)
-    points.forEach((p, i) => {
-      arr[i * 3] = p.x
-      arr[i * 3 + 1] = p.y
-      arr[i * 3 + 2] = p.z
-    })
-    return arr
-  }, [points])
+  // Flat RGB buffer reused each frame; initial vertexColors enable vertex-colour mode.
+  const colors = useMemo(() => new Float32Array(points.length * 3), [points])
+  const initialVertexColors = useMemo(
+    () => points.map(() => [0, 0, 0] as [number, number, number]),
+    [points],
+  )
 
-  const flownColors = useMemo(() => new Float32Array(points.length * 3), [points])
-  const aheadColors = useMemo(() => {
-    const arr = new Float32Array(points.length * 3)
-    arr.fill(DIM)
-    return arr
-  }, [points])
-
-  const flownRef = useRef<THREE.Line>(null)
-  const aheadRef = useRef<THREE.Line>(null)
+  const lineRef = useRef<any>(null)
   const chevron = useRef<THREE.Group>(null)
   const glowMat = useRef<THREE.MeshBasicMaterial>(null)
   const drawStart = useRef<number | null>(null)
 
-  // Restart the draw-in animation whenever the mission changes.
+  // Restart the draw-in whenever the mission changes.
   useEffect(() => {
     drawStart.current = null
   }, [mission.id])
@@ -67,22 +78,16 @@ export default function TrajectoryArchetype({ mission }: { mission: Mission }) {
     const missionT = useMissionStore.getState().missionT
     const curIdx = Math.max(0, Math.min(Math.round(missionT * (N - 1)), revealCount - 1))
 
-    // Flown portion: luminance ramp 0.3 → 1.0 up to the scrubber position.
-    for (let i = 0; i <= curIdx; i++) {
-      const b = curIdx === 0 ? 1 : 0.3 + 0.7 * (i / curIdx)
-      flownColors[i * 3] = b
-      flownColors[i * 3 + 1] = b
-      flownColors[i * 3 + 2] = b
+    for (let i = 0; i < N; i++) {
+      let b: number
+      if (i <= curIdx) b = curIdx === 0 ? 1 : 0.3 + 0.7 * (i / curIdx) // flown ramp
+      else if (i <= revealCount) b = DIM // ahead, revealed
+      else b = 0 // not yet drawn-in → black → invisible on black
+      colors[i * 3] = b
+      colors[i * 3 + 1] = b
+      colors[i * 3 + 2] = b
     }
-    if (flownRef.current) {
-      const geo = flownRef.current.geometry as THREE.BufferGeometry
-      ;(geo.attributes.color as THREE.BufferAttribute).needsUpdate = true
-      geo.setDrawRange(0, curIdx + 1)
-    }
-    if (aheadRef.current) {
-      const geo = aheadRef.current.geometry as THREE.BufferGeometry
-      geo.setDrawRange(curIdx, Math.max(0, revealCount - curIdx))
-    }
+    if (lineRef.current?.geometry?.setColors) lineRef.current.geometry.setColors(colors)
 
     // Spacecraft chevron at the scrubber position, oriented along the tangent.
     if (chevron.current) {
@@ -95,35 +100,22 @@ export default function TrajectoryArchetype({ mission }: { mission: Mission }) {
       }
     }
     if (glowMat.current) {
-      const pulse = 0.3 + 0.12 * Math.sin(state.clock.elapsedTime * 2.2)
-      glowMat.current.opacity = pulse
+      glowMat.current.opacity = 0.32 + 0.12 * Math.sin(state.clock.elapsedTime * 2.2)
     }
   })
 
-  // Scale the chevron to the scene frame (heliocentric units are smaller).
-  const glyphScale = mission.viewMode === 'HELIOCENTRIC' ? 1.0 : 3.2
+  const glyphScale = glyphScaleFor(mission.trajectoryArchetype)
 
   return (
     <group>
-      {/* Ahead-of-scrubber portion (dim) */}
-      {/* @ts-expect-error R3F line intrinsic */}
-      <line ref={aheadRef}>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-          <bufferAttribute attach="attributes-color" args={[aheadColors, 3]} />
-        </bufferGeometry>
-        <lineBasicMaterial vertexColors transparent opacity={0.6} />
-      </line>
-
-      {/* Flown portion (white luminance ramp) */}
-      {/* @ts-expect-error R3F line intrinsic */}
-      <line ref={flownRef}>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-          <bufferAttribute attach="attributes-color" args={[flownColors, 3]} />
-        </bufferGeometry>
-        <lineBasicMaterial vertexColors transparent />
-      </line>
+      {/* Trajectory: fat line, 2.5px, vertex-coloured luminance ramp (Option B) */}
+      <Line
+        ref={lineRef}
+        points={points}
+        vertexColors={initialVertexColors}
+        lineWidth={2.5}
+        transparent
+      />
 
       {/* Spacecraft chevron + white endpoint glow */}
       <group ref={chevron} scale={glyphScale}>
@@ -133,7 +125,7 @@ export default function TrajectoryArchetype({ mission }: { mission: Mission }) {
         </mesh>
         <mesh>
           <sphereGeometry args={[1.6, 16, 16]} />
-          <meshBasicMaterial ref={glowMat} color="#ffffff" transparent opacity={0.3} depthWrite={false} />
+          <meshBasicMaterial ref={glowMat} color="#ffffff" transparent opacity={0.32} depthWrite={false} />
         </mesh>
       </group>
     </group>

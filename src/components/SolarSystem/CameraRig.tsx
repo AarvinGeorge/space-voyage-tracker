@@ -13,6 +13,8 @@ export default function CameraRig({ mission }: { mission: Mission }) {
   const { camera } = useThree()
   // C1: re-frame when the toggle changes the store's view mode.
   const viewMode = useMissionStore((s) => s.viewMode)
+  // H3: re-frame when the camera-mode chip changes (PERSPECTIVE / TOP_DOWN / FREE).
+  const hudCameraMode = useMissionStore((s) => s.hudCameraMode)
   const isHelio = viewMode === 'HELIOCENTRIC'
   const controlsRef = useRef<any>(null)
   const animating = useRef(false)
@@ -20,7 +22,9 @@ export default function CameraRig({ mission }: { mission: Mission }) {
   const targetLook = useRef(new THREE.Vector3())
 
   // On mission OR view-mode change, compute a framing that fits the scene.
+  // v1.2 H1: per-archetype default distances so each scene reads full, not empty.
   useEffect(() => {
+    const arch = mission.trajectoryArchetype
     const pts = getTrajectoryPoints(mission)
     const box = new THREE.Box3().setFromPoints(pts)
     if (isHelio) {
@@ -30,13 +34,47 @@ export default function CameraRig({ mission }: { mission: Mission }) {
     }
     const center = box.getCenter(new THREE.Vector3())
     const size = box.getSize(new THREE.Vector3()).length()
-    const dist = isHelio ? Math.max(size * 1.1, 130) : Math.max(size * 1.15, 18)
-    const dir = new THREE.Vector3(0.55, 0.5, 1).normalize()
+
+    let dist: number
+    if (isHelio) {
+      // Outer (Voyager/Cassini/NH) frame wide; inner (Mars) frame mid.
+      dist = THREE.MathUtils.clamp(size * 1.05, 95, 300)
+    } else {
+      switch (arch) {
+        case 'TRANS_LUNAR':
+        case 'LUNAR_ORBIT':
+        case 'LUNAR_LANDING':
+          dist = Math.max(size * 0.95, 55) // tight Earth-Moon framing
+          break
+        case 'LEO_CIRCULAR':
+          dist = Math.max(size * 2.2, 20)
+          break
+        case 'L2_HALO':
+          dist = Math.max(size * 1.05, 80)
+          break
+        case 'BALLISTIC_SUBORBITAL':
+          dist = Math.max(size * 1.6, 20)
+          break
+        default:
+          dist = Math.max(size * 1.15, 18)
+      }
+    }
+
+    // FREE mode: user drives the camera; don't auto-frame.
+    if (hudCameraMode === 'FREE') {
+      animating.current = false
+      return
+    }
+    // TOP_DOWN looks straight down; PERSPECTIVE is the angled hero view.
+    const dir =
+      hudCameraMode === 'TOP_DOWN'
+        ? new THREE.Vector3(0.001, 1, 0.001).normalize()
+        : new THREE.Vector3(0.55, 0.45, 1).normalize()
     targetLook.current.copy(center)
     targetPos.current.copy(center).addScaledVector(dir, dist)
     animating.current = true
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mission.id, viewMode])
+  }, [mission.id, viewMode, hudCameraMode])
 
   useFrame((_, delta) => {
     const controls = controlsRef.current

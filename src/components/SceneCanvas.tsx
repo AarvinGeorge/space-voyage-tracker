@@ -7,6 +7,7 @@ import { getMissionById } from '../data/missionsList'
 import OrionModel from './OrionModel'
 import SolarSystem from './SolarSystem/SolarSystem'
 import CameraRig from './SolarSystem/CameraRig'
+import CameraDistanceReporter from './SolarSystem/CameraDistanceReporter'
 import TrajectoryArchetype from './Trajectories/TrajectoryArchetype'
 import {
   missionCurve, idxToT,
@@ -483,6 +484,7 @@ export default function SceneCanvas() {
       <ambientLight intensity={isArtemis ? 0.05 : 0.18} />
       <directionalLight position={SUN_POS.toArray()} intensity={2.2} color="#fff8e7" />
       <Starfield />
+      <CameraDistanceReporter />
 
       {isArtemis ? (
         // ── Artemis II: v0 scene preserved unchanged ──

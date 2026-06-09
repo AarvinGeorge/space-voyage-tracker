@@ -7,6 +7,9 @@ import MissionSidebar from './components/MissionSidebar/MissionSidebar'
 import MissionCard from './components/MissionCard/MissionCard'
 import MissionTimeline from './components/Timeline/MissionTimeline'
 import ArtemisHUD from './components/HUD/ArtemisHUD'
+import ModeChip from './components/HUD/ModeChip'
+import ScaleChip from './components/HUD/ScaleChip'
+import CameraChip from './components/HUD/CameraChip'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from './components/ui/sheet'
 import ViewModeToggle from './components/TopBar/ViewModeToggle'
 import { useMissionStore } from './store/missionStore'
@@ -50,18 +53,33 @@ export default function App() {
         <main className="relative min-h-0 flex-1 overflow-hidden">
           <SceneCanvas />
 
-          {/* Vignette — darkens edges so overlays read over the 3D scene (v0). */}
-          <div
-            className="pointer-events-none absolute inset-0 z-[5]"
-            style={{
-              background: [
-                'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 45%, rgba(0,0,0,0.65) 100%)',
-                'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 18%, transparent 82%, rgba(0,0,0,0.55) 100%)',
-              ].join(', '),
-            }}
-          />
+          {/* Vignette — v0 leftover; H2 scopes it to Artemis II only (its v0 HUD
+              overlays need the darkened edges; the other 24 missions don't). */}
+          {isArtemis && (
+            <div
+              className="pointer-events-none absolute inset-0 z-[5]"
+              style={{
+                background: [
+                  'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 45%, rgba(0,0,0,0.65) 100%)',
+                  'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 18%, transparent 82%, rgba(0,0,0,0.55) 100%)',
+                ].join(', '),
+              }}
+            />
+          )}
 
           {isArtemis && <ArtemisHUD />}
+
+          {/* v1.2 H3: HUD chips. Shown on the 24 non-Artemis missions; Artemis II
+              keeps its preserved v0 HUD (TelemetryStrip/MissionElapsed already
+              occupy these corners), so chips would collide there. */}
+          {!isArtemis && (
+            <>
+              <ModeChip />
+              <ScaleChip />
+              <CameraChip />
+            </>
+          )}
+
           <MissionCard />
           <MissionTimeline />
         </main>
