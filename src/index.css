@@ -119,30 +119,26 @@
   --radius-shadcn: var(--radius);
 }
 
-/* Default border color for shadcn primitives (width stays 0 unless set,
-   so this does not add visible borders to existing v0 components). */
+/* v0 base reset + default shadcn border color.
+   IMPORTANT (v1.3): this MUST live inside @layer base. The v0 reset was
+   previously written UNLAYERED, and in Tailwind v4 unlayered CSS beats
+   @layer utilities — so `margin: 0; padding: 0` silently zeroed EVERY p-*/m-*/
+   px-*/etc. utility app-wide (the long-standing "cramped, no padding" bug).
+   Inside @layer base the utilities win, so the Figma-specified padding/margins
+   finally render. border-color default keeps width 0 unless set, so it adds no
+   visible borders to existing v0 components. */
 @layer base {
-  * {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     border-color: var(--border);
   }
 }
 
-/* ─────────────────────────────────────────────────────────────────────────
-   v0 base reset + LIVE pulse.
-   NOTE (v1.2.1): the v0 fluid `font-size: calc(0.625rem + 0.41vw)` was removed.
-   It scaled the root font-size with viewport width (~14px @640 → 16px @1440 →
-   ~20px @2560), so every rem-based utility (row heights, padding, gaps) drifted
-   from the Figma at every width except 1440px while fixed-px text stayed put —
-   the "weird, cramped" adaptation. The Figma is designed at a 16px base, so a
-   fixed 16px root makes the rem and px scales consistent and matches the frames
-   at every screen size. Real responsiveness is handled by Tailwind breakpoints.
-   ───────────────────────────────────────────────────────────────────────── */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* NOTE (v1.2.1): the v0 fluid `font-size: calc(0.625rem + 0.41vw)` was removed.
+   The Figma is designed at a 16px base; a fixed 16px root keeps the rem and px
+   scales consistent. The Artemis HUD restores fluid scaling locally below. */
 html {
   font-size: 16px;
 }
