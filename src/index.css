@@ -128,7 +128,14 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   v0 base reset + fluid sizing + LIVE pulse — preserved unchanged
+   v0 base reset + LIVE pulse.
+   NOTE (v1.2.1): the v0 fluid `font-size: calc(0.625rem + 0.41vw)` was removed.
+   It scaled the root font-size with viewport width (~14px @640 → 16px @1440 →
+   ~20px @2560), so every rem-based utility (row heights, padding, gaps) drifted
+   from the Figma at every width except 1440px while fixed-px text stayed put —
+   the "weird, cramped" adaptation. The Figma is designed at a 16px base, so a
+   fixed 16px root makes the rem and px scales consistent and matches the frames
+   at every screen size. Real responsiveness is handled by Tailwind breakpoints.
    ───────────────────────────────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -137,11 +144,8 @@
 }
 
 html {
-  font-size: calc(0.625rem + 0.41666666666666663vw);
+  font-size: 16px;
 }
-@media screen and (max-width:1920px) { html { font-size: calc(0.625rem + 0.41666666666666674vw); } }
-@media screen and (max-width:1440px) { html { font-size: calc(0.8126951092611863rem + 0.20811654526534862vw); } }
-@media screen and (max-width:479px) { html { font-size: calc(0.7494769874476988rem + 0.8368200836820083vw); } }
 
 body, #root {
   width: 100%;

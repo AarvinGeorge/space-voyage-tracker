@@ -26,7 +26,8 @@ const INITIAL_MISSION = getMissionById(INITIAL_MISSION_ID)
 // visible); desktop opens the FULL card. Matches the Frame 7 mobile spec.
 function defaultCardStateForViewport(): CardState {
   if (typeof window === 'undefined') return 'FULL'
-  return window.innerWidth < 640 ? 'TAG' : 'FULL'
+  // Matches MOBILE_BREAKPOINT in useIsMobile (compact layout below 1024px).
+  return window.innerWidth < 1024 ? 'TAG' : 'FULL'
 }
 
 // Bridge the new normalized timeline (0-1) to v0's index-based Artemis time.
