@@ -73,7 +73,6 @@ interface MissionState {
   cardState: CardState
   cardPosition: { x: number; y: number } | null
   sidebarCollapsed: boolean
-  searchQuery: string
   missionT: number                   // normalized 0-1 scrubber position for the selected mission
   timelinePlaying: boolean
   playbackSpeed: PlaybackSpeed
@@ -91,7 +90,6 @@ interface MissionState {
   setHoveredMission: (id: string | null) => void
   setViewMode:     (m: ViewMode) => void
   setSidebarCollapsed: (c: boolean) => void
-  setSearchQuery:  (q: string) => void
   setMissionT:     (t: number) => void
   toggleTimelinePlay: () => void
   setTimelinePlaying: (p: boolean) => void
@@ -146,7 +144,6 @@ export const useMissionStore = create<MissionState>((set, get) => ({
   cardState:          defaultCardStateForViewport(),
   cardPosition:       null,
   sidebarCollapsed:   false,
-  searchQuery:        '',
   missionT:           0,
   timelinePlaying:    false,
   playbackSpeed:      (INITIAL_MISSION?.defaultSpeed ?? 1),
@@ -187,7 +184,6 @@ export const useMissionStore = create<MissionState>((set, get) => ({
   setHoveredMission: (id) => set({ hoveredMissionId: id }),
   setViewMode: (m) => set({ viewMode: m }),
   setSidebarCollapsed: (c) => set({ sidebarCollapsed: c }),
-  setSearchQuery: (q) => set({ searchQuery: q }),
 
   setMissionT: (t) => {
     const clamped = Math.max(0, Math.min(1, t))

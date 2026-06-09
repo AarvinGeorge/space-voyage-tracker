@@ -16,8 +16,10 @@ export default function AgencyGroup({
   open,
   onOpenChange,
   selectedMissionId,
+  tabbableId,
   onSelect,
   onHover,
+  onRowFocus,
 }: {
   label: string
   missions: Mission[]
@@ -25,8 +27,10 @@ export default function AgencyGroup({
   open: boolean
   onOpenChange: (open: boolean) => void
   selectedMissionId: string | null
+  tabbableId: string | null
   onSelect: (id: string) => void
   onHover: (id: string | null) => void
+  onRowFocus: (id: string) => void
 }) {
   return (
     <>
@@ -51,14 +55,16 @@ export default function AgencyGroup({
             )}
           />
         </CollapsibleTrigger>
-        <CollapsibleContent>
+        <CollapsibleContent role="presentation">
           {missions.map((m) => (
             <MissionRow
               key={m.id}
               mission={m}
               active={selectedMissionId === m.id}
+              tabIndex={tabbableId === m.id ? 0 : -1}
               onSelect={() => onSelect(m.id)}
               onHover={onHover}
+              onFocus={() => onRowFocus(m.id)}
             />
           ))}
         </CollapsibleContent>
