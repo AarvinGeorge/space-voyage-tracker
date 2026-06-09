@@ -115,11 +115,12 @@ export default function MissionSidebar({
       </div>
 
       <ScrollArea className="flex-1">
-        {filtered.map((g) => (
+        {filtered.map((g, index) => (
           <AgencyGroup
             key={g.agency}
             label={g.label}
             missions={g.missions}
+            isFirst={index === 0}
             open={q ? true : expanded.has(g.agency)}
             onOpenChange={(open) =>
               setExpanded((prev) => {
