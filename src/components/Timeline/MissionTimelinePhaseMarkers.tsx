@@ -28,7 +28,7 @@ export default function MissionTimelinePhaseMarkers({
             {showLabels && (
               <span
                 className={cn(
-                  'absolute left-1/2 top-[10px] -translate-x-1/2 whitespace-nowrap font-body-mono text-[7px] uppercase tracking-[0.08em]',
+                  'absolute left-1/2 top-[10px] -translate-x-1/2 whitespace-nowrap font-body-mono text-[8px] uppercase tracking-[0.1em]',
                   visited ? 'text-text-secondary' : 'text-border',
                 )}
               >

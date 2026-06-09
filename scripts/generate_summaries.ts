@@ -32,6 +32,7 @@ Requirements:
 - Exactly three paragraphs.
 - Approximately 250 words total (240-270 acceptable).
 - Plain prose. No markdown, no bullet points, no headings.
+- Do not use em-dashes (—). Use commas, periods, or "and"/"but" instead.
 - Open with what makes the mission significant.
 - Tell what happened: launch, key events, outcome.
 - Name the people, hardware, and the historical context that gave the mission character.
@@ -55,6 +56,7 @@ function qualityIssues(text: string): string | null {
   if (words < 220 || words > 280) return `word count ${words}`
   if (/[#*]|^\s*[-•]/m.test(text)) return 'contains markdown'
   if (/wikipedia/i.test(text)) return 'mentions a source'
+  if (/—/.test(text)) return 'contains em-dash'
   return null
 }
 
