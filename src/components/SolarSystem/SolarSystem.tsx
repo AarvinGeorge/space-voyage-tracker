@@ -1,4 +1,5 @@
 import type { Mission } from '@/data/types'
+import { useMissionStore } from '@/store/missionStore'
 import { EARTH_R, MOON_R, MOON_POS, PLANET_KEYS, PLANETS, helioPos } from '@/lib/solarSystem'
 import Planet from './Planet'
 import Sun from './Sun'
@@ -12,12 +13,18 @@ import KarmanLineRing from './KarmanLineRing'
 // — cannot coexist, so we switch). Not mounted for Artemis II (the v0 scene
 // owns Earth/Moon/RangeRings for that mission).
 export default function SolarSystem({ mission }: { mission: Mission }) {
+  // C1: the active view mode is the STORE value (toggle-driven), not the static
+  // mission attribute. selectMission seeds store.viewMode from the mission, and
+  // the top-bar toggle overrides it — so the scene reacts to the toggle.
+  const storeViewMode = useMissionStore((s) => s.viewMode)
+  const effectiveViewMode = storeViewMode ?? mission.viewMode
+
   const arch = mission.trajectoryArchetype
   const isLunar = arch === 'TRANS_LUNAR' || arch === 'LUNAR_ORBIT' || arch === 'LUNAR_LANDING'
   const isSuborbital = arch === 'BALLISTIC_SUBORBITAL'
   const isL2 = arch === 'L2_HALO'
 
-  if (mission.viewMode === 'HELIOCENTRIC') {
+  if (effectiveViewMode === 'HELIOCENTRIC') {
     return (
       <group>
         <Sun />

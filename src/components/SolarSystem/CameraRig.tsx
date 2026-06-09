@@ -3,6 +3,7 @@ import { useThree, useFrame } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import type { Mission } from '@/data/types'
+import { useMissionStore } from '@/store/missionStore'
 import { getTrajectoryPoints } from '@/lib/trajectories'
 
 // drei <OrbitControls> with full free navigation + smart auto-fit on mission
@@ -10,24 +11,32 @@ import { getTrajectoryPoints } from '@/lib/trajectories'
 // v0 camera controller untouched.
 export default function CameraRig({ mission }: { mission: Mission }) {
   const { camera } = useThree()
+  // C1: re-frame when the toggle changes the store's view mode.
+  const viewMode = useMissionStore((s) => s.viewMode)
+  const isHelio = viewMode === 'HELIOCENTRIC'
   const controlsRef = useRef<any>(null)
   const animating = useRef(false)
   const targetPos = useRef(new THREE.Vector3())
   const targetLook = useRef(new THREE.Vector3())
 
-  // On mission (or view-mode) change, compute a framing that fits the trajectory.
+  // On mission OR view-mode change, compute a framing that fits the scene.
   useEffect(() => {
     const pts = getTrajectoryPoints(mission)
     const box = new THREE.Box3().setFromPoints(pts)
+    if (isHelio) {
+      // Heliocentric: always include the Sun (origin) so the solar system frames,
+      // even when a lunar/LEO mission is toggled into the heliocentric context.
+      box.expandByPoint(new THREE.Vector3(0, 0, 0))
+    }
     const center = box.getCenter(new THREE.Vector3())
     const size = box.getSize(new THREE.Vector3()).length()
-    const dist = Math.max(size * 1.15, 18)
+    const dist = isHelio ? Math.max(size * 1.1, 130) : Math.max(size * 1.15, 18)
     const dir = new THREE.Vector3(0.55, 0.5, 1).normalize()
     targetLook.current.copy(center)
     targetPos.current.copy(center).addScaledVector(dir, dist)
     animating.current = true
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mission.id, mission.viewMode])
+  }, [mission.id, viewMode])
 
   useFrame((_, delta) => {
     const controls = controlsRef.current
@@ -46,8 +55,6 @@ export default function CameraRig({ mission }: { mission: Mission }) {
       animating.current = false
     }
   })
-
-  const isHelio = mission.viewMode === 'HELIOCENTRIC'
 
   return (
     <OrbitControls
