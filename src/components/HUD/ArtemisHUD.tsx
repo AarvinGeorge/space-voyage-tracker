@@ -12,7 +12,7 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 // (handoff step L). PhaseScrubber is intentionally excluded — it is deprecated
 // in v1 and replaced for all missions by MissionTimeline.
 //
-// v1.3 E3: the root carries `.artemis-ii-hud-root`, which restores the v0 fluid
+// v1.3 E3: the root carries `.fluid-scale-root`, which restores the v0 fluid
 // rem scaling locally (index.css) so this HUD renders pixel-identical to v0 even
 // though the rest of the dashboard now uses a fixed 16px root. The wrapper is a
 // non-positioned block whose children are all absolute/portaled, so it adds no
@@ -22,7 +22,7 @@ export default function ArtemisHUD() {
   const [feedOpen, setFeedOpen] = useState(false)
 
   return (
-    <div className="artemis-ii-hud-root">
+    <div className="fluid-scale-root">
       {isMobile ? (
         <>
           <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-4 px-4 pt-3">

@@ -148,14 +148,14 @@ html {
 }
 
 /* v1.3 E3: the Artemis II HUD genuinely needs the v0 fluid rem scaling for its
-   rem-based components, so it is restored LOCALLY on the .artemis-ii-hud-root
+   rem-based components, so it is restored LOCALLY on the .fluid-scale-root
    wrapper only — the rest of the dashboard stays at the fixed 16px root above. */
-.artemis-ii-hud-root {
+.fluid-scale-root {
   font-size: calc(0.625rem + 0.41666666666666663vw);
 }
-@media screen and (max-width:1920px) { .artemis-ii-hud-root { font-size: calc(0.625rem + 0.41666666666666674vw); } }
-@media screen and (max-width:1440px) { .artemis-ii-hud-root { font-size: calc(0.8126951092611863rem + 0.20811654526534862vw); } }
-@media screen and (max-width:479px)  { .artemis-ii-hud-root { font-size: calc(0.7494769874476988rem + 0.8368200836820083vw); } }
+@media screen and (max-width:1920px) { .fluid-scale-root { font-size: calc(0.625rem + 0.41666666666666674vw); } }
+@media screen and (max-width:1440px) { .fluid-scale-root { font-size: calc(0.8126951092611863rem + 0.20811654526534862vw); } }
+@media screen and (max-width:479px)  { .fluid-scale-root { font-size: calc(0.7494769874476988rem + 0.8368200836820083vw); } }
 
 body, #root {
   width: 100%;
