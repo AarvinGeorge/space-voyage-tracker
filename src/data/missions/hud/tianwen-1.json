@@ -1,0 +1,75 @@
+{
+  "identity": {
+    "missionName": "Tianwen-1 + Zhurong",
+    "phases": [
+      {
+        "untilT": 0.05,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.85,
+        "label": "CRUISE"
+      },
+      {
+        "untilT": 0.97,
+        "label": "MARS ORBIT"
+      },
+      {
+        "untilT": 1.0,
+        "label": "LANDING"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2020-07-23T04:41:00Z",
+    "durationSeconds": 25920000
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. SUN",
+        "value": "151,983,133 km"
+      },
+      {
+        "label": "DIST. EARTH",
+        "value": "0 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "29.32 km/s"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2020-07-23T04:41:00Z",
+        "detail": "Long March 5 from Wenchang"
+      },
+      {
+        "t": 0.85,
+        "label": "ARRIVAL",
+        "utc": "2021-02-10T00:00:00Z",
+        "detail": "Mars orbit insertion on the first attempt"
+      },
+      {
+        "t": 1,
+        "label": "LANDING",
+        "utc": "2021-05-14T23:18:00Z",
+        "detail": "Zhurong lands in Utopia Planitia"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

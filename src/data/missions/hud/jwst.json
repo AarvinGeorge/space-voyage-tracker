@@ -1,0 +1,70 @@
+{
+  "identity": {
+    "missionName": "James Webb Space Telescope",
+    "phases": [
+      {
+        "untilT": 0.05,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.5,
+        "label": "UNFOLDING"
+      },
+      {
+        "untilT": 0.9,
+        "label": "TO L2"
+      },
+      {
+        "untilT": 1.0,
+        "label": "HALO ORBIT"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2021-12-25T12:20:00Z",
+    "durationSeconds": 2505600
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. EARTH",
+        "value": "12,055 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "8.09 km/s"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2021-12-25T12:20:00Z",
+        "detail": "Ariane 5 from Kourou on Christmas morning"
+      },
+      {
+        "t": 0.5,
+        "label": "UNFOLD",
+        "detail": "Sunshield and mirror deployment sequence in transit"
+      },
+      {
+        "t": 1,
+        "label": "L2 HALO",
+        "utc": "2022-01-24T19:00:00Z",
+        "detail": "Arrives in halo orbit around Sun-Earth L2"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

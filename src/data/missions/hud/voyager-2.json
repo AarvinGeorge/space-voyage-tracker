@@ -1,0 +1,96 @@
+{
+  "identity": {
+    "missionName": "Voyager 2",
+    "phases": [
+      {
+        "untilT": 0.14,
+        "label": "JUPITER LEG"
+      },
+      {
+        "untilT": 0.26,
+        "label": "SATURN LEG"
+      },
+      {
+        "untilT": 0.42,
+        "label": "URANUS LEG"
+      },
+      {
+        "untilT": 0.56,
+        "label": "NEPTUNE LEG"
+      },
+      {
+        "untilT": 1.0,
+        "label": "OUTBOUND"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "1977-08-20T14:29:00Z",
+    "durationSeconds": 1490000000
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. SUN",
+        "value": "151,351,480 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "42.93 km/s"
+      },
+      {
+        "label": "DIST. EARTH",
+        "value": "8,098 km"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "1977-08-20T14:29:00Z",
+        "detail": "Launched 16 days before Voyager 1"
+      },
+      {
+        "t": 0.14,
+        "label": "JUPITER",
+        "utc": "1979-07-09T22:29:00Z",
+        "detail": "Jupiter flyby; images the Great Red Spot"
+      },
+      {
+        "t": 0.26,
+        "label": "SATURN",
+        "utc": "1981-08-25T03:24:00Z",
+        "detail": "Saturn flyby continues the Grand Tour"
+      },
+      {
+        "t": 0.42,
+        "label": "URANUS",
+        "utc": "1986-01-24T17:59:00Z",
+        "detail": "Only spacecraft ever to visit Uranus"
+      },
+      {
+        "t": 0.56,
+        "label": "NEPTUNE",
+        "utc": "1989-08-25T03:56:00Z",
+        "detail": "Only spacecraft ever to visit Neptune; Triton flyby"
+      },
+      {
+        "t": 1,
+        "label": "OUTBOUND",
+        "detail": "Interstellar since 2018, still transmitting"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

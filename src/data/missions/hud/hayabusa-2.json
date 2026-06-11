@@ -1,0 +1,81 @@
+{
+  "identity": {
+    "missionName": "Hayabusa 2",
+    "phases": [
+      {
+        "untilT": 0.05,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.45,
+        "label": "OUTBOUND"
+      },
+      {
+        "untilT": 0.82,
+        "label": "AT RYUGU"
+      },
+      {
+        "untilT": 1.0,
+        "label": "RETURN"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2014-12-03T04:22:00Z",
+    "durationSeconds": 189000000
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. SUN",
+        "value": "147,473,741 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "26.96 km/s"
+      },
+      {
+        "label": "DIST. EARTH",
+        "value": "8,849 km"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2014-12-03T04:22:00Z",
+        "detail": "H-IIA launch from Tanegashima"
+      },
+      {
+        "t": 0.45,
+        "label": "ARRIVAL",
+        "utc": "2018-06-27T00:00:00Z",
+        "detail": "Arrives at asteroid Ryugu"
+      },
+      {
+        "t": 0.6,
+        "label": "TOUCH",
+        "utc": "2019-02-21T00:00:00Z",
+        "detail": "First touchdown; subsurface sample collected"
+      },
+      {
+        "t": 1,
+        "label": "RETURN",
+        "utc": "2020-12-05T17:28:00Z",
+        "detail": "Sample capsule lands at Woomera, Australia"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

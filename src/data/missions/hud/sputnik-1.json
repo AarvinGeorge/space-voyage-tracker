@@ -1,0 +1,69 @@
+{
+  "identity": {
+    "missionName": "Sputnik 1",
+    "phases": [
+      {
+        "untilT": 0.1,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.5,
+        "label": "ORBIT"
+      },
+      {
+        "untilT": 1.0,
+        "label": "TRANSMIT"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "1957-10-04T19:28:00Z",
+    "durationSeconds": 5760
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "ALTITUDE",
+        "value": "215–939 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "7.98 km/s"
+      },
+      {
+        "label": "PERIOD",
+        "value": "96.2 min"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "1957-10-04T19:28:00Z",
+        "detail": "R-7 rocket launches from Baikonur"
+      },
+      {
+        "t": 0.5,
+        "label": "ORBIT",
+        "detail": "First artificial satellite, 215 x 939 km orbit"
+      },
+      {
+        "t": 1,
+        "label": "BEEP",
+        "detail": "Transmits 21 days; reenters January 4, 1958"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

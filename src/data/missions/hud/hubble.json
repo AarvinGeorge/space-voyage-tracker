@@ -1,0 +1,69 @@
+{
+  "identity": {
+    "missionName": "Hubble Space Telescope",
+    "phases": [
+      {
+        "untilT": 0.1,
+        "label": "DEPLOY"
+      },
+      {
+        "untilT": 0.5,
+        "label": "ORBIT"
+      },
+      {
+        "untilT": 1.0,
+        "label": "OPERATIONS"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "1990-04-25T00:00:00Z",
+    "durationSeconds": 5760
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "ALTITUDE",
+        "value": "614 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "7.55 km/s"
+      },
+      {
+        "label": "PERIOD",
+        "value": "97.0 min"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "DEPLOY",
+        "utc": "1990-04-25T00:00:00Z",
+        "detail": "Released from Discovery's robot arm on STS-31"
+      },
+      {
+        "t": 0.5,
+        "label": "ORBIT",
+        "detail": "One ~97-minute orbit at ~614 km, shown as the loop"
+      },
+      {
+        "t": 1,
+        "label": "ONGOING",
+        "detail": "35 years of observations across 5 servicing missions"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

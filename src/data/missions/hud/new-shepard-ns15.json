@@ -1,0 +1,70 @@
+{
+  "identity": {
+    "missionName": "New Shepard NS-15",
+    "phases": [
+      {
+        "untilT": 0.4,
+        "label": "ASCENT"
+      },
+      {
+        "untilT": 0.6,
+        "label": "COAST"
+      },
+      {
+        "untilT": 1.0,
+        "label": "DESCENT"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2021-04-14T13:51:00Z",
+    "durationSeconds": 600
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "APOGEE",
+        "value": "107 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "MACH 3+ (ASCENT)"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2021-04-14T13:51:00Z",
+        "detail": "Uncrewed rehearsal of crew operations"
+      },
+      {
+        "t": 0.23,
+        "label": "MECO",
+        "detail": "Main engine cutoff; capsule and booster coast"
+      },
+      {
+        "t": 0.5,
+        "label": "APOGEE",
+        "detail": "Capsule peaks at 351,221 ft, above the Karman line"
+      },
+      {
+        "t": 1,
+        "label": "LANDING",
+        "detail": "Capsule lands on parachutes; booster relands"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "identity": {
+    "missionName": "Artemis II",
+    "phases": [
+      {
+        "untilT": 0.1,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.36,
+        "label": "OUTBOUND"
+      },
+      {
+        "untilT": 0.57,
+        "label": "LUNAR SOI"
+      },
+      {
+        "untilT": 0.78,
+        "label": "FLYBY"
+      },
+      {
+        "untilT": 1.0,
+        "label": "RETURN"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2026-04-01T23:44:00Z",
+    "durationSeconds": 864000
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. EARTH",
+        "value": "41,286 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "3.12 km/s"
+      },
+      {
+        "label": "ALTITUDE",
+        "value": "34,915 km"
+      }
+    ],
+    "status": "PROJECTED",
+    "sourceLabel": "LIVE HORIZONS"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LIFTOFF",
+        "detail": "SLS Block 1 with a crew of four"
+      },
+      {
+        "t": 0.1,
+        "label": "EARTHPAS",
+        "detail": "High-Earth-orbit checkout before committing to the Moon"
+      },
+      {
+        "t": 0.36,
+        "label": "LUNARSOI",
+        "detail": "Enters the lunar sphere of influence"
+      },
+      {
+        "t": 0.57,
+        "label": "FLYBY",
+        "detail": "Free-return flyby beyond the far side of the Moon"
+      },
+      {
+        "t": 0.78,
+        "label": "RETURN",
+        "detail": "Coasting home on the free-return trajectory"
+      },
+      {
+        "t": 1,
+        "label": "REENTRY",
+        "detail": "Skip reentry and Pacific splashdown"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE",
+      "SHIP_FOLLOW"
+    ],
+    "liveFeed": true
+  }
+}

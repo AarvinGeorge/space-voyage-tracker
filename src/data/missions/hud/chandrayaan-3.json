@@ -1,0 +1,80 @@
+{
+  "identity": {
+    "missionName": "Chandrayaan-3",
+    "phases": [
+      {
+        "untilT": 0.05,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.5,
+        "label": "EARTH PHASE"
+      },
+      {
+        "untilT": 0.95,
+        "label": "LUNAR ORBIT"
+      },
+      {
+        "untilT": 1.0,
+        "label": "DESCENT"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2023-07-14T09:05:00Z",
+    "durationSeconds": 3456000
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. EARTH",
+        "value": "6,541 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "10.28 km/s"
+      },
+      {
+        "label": "ALTITUDE",
+        "value": "170 km"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2023-07-14T09:05:00Z",
+        "detail": "LVM3 from Sriharikota into a 170 x 36,500 km orbit"
+      },
+      {
+        "t": 0.4,
+        "label": "TLI",
+        "detail": "Trans-lunar injection after five Earth-bound burns"
+      },
+      {
+        "t": 0.5,
+        "label": "LOI",
+        "utc": "2023-08-05T00:00:00Z",
+        "detail": "Lunar orbit insertion"
+      },
+      {
+        "t": 1,
+        "label": "LANDING",
+        "utc": "2023-08-23T12:33:00Z",
+        "detail": "Vikram soft-lands near the lunar south pole"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

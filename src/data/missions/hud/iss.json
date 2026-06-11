@@ -1,0 +1,69 @@
+{
+  "identity": {
+    "missionName": "International Space Station",
+    "phases": [
+      {
+        "untilT": 0.1,
+        "label": "ZARYA"
+      },
+      {
+        "untilT": 0.5,
+        "label": "ASSEMBLY"
+      },
+      {
+        "untilT": 1.0,
+        "label": "CREWED OPS"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "1998-11-20T06:40:00Z",
+    "durationSeconds": 5560
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "ALTITUDE",
+        "value": "400 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "7.67 km/s"
+      },
+      {
+        "label": "PERIOD",
+        "value": "92.9 min"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "ZARYA",
+        "utc": "1998-11-20T06:40:00Z",
+        "detail": "First module launches from Baikonur"
+      },
+      {
+        "t": 0.5,
+        "label": "ORBIT",
+        "detail": "Assembled over 40+ flights; one ~93-minute orbit shown"
+      },
+      {
+        "t": 1,
+        "label": "CREWED",
+        "detail": "Continuously crewed since November 2000"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

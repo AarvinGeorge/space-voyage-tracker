@@ -1,0 +1,75 @@
+{
+  "identity": {
+    "missionName": "New Horizons",
+    "phases": [
+      {
+        "untilT": 0.05,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.13,
+        "label": "JUPITER LEG"
+      },
+      {
+        "untilT": 0.95,
+        "label": "CRUISE"
+      },
+      {
+        "untilT": 1.0,
+        "label": "ENCOUNTER"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2006-01-19T19:00:00Z",
+    "durationSeconds": 300000000
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. SUN",
+        "value": "147,204,956 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "44.92 km/s"
+      },
+      {
+        "label": "DIST. EARTH",
+        "value": "13,944 km"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2006-01-19T19:00:00Z",
+        "detail": "Atlas V 551; fastest launch speed from Earth"
+      },
+      {
+        "t": 0.13,
+        "label": "JUPITER",
+        "utc": "2007-02-28T00:00:00Z",
+        "detail": "Jupiter gravity assist adds ~4 km/s"
+      },
+      {
+        "t": 1,
+        "label": "PLUTO",
+        "utc": "2015-07-14T11:49:00Z",
+        "detail": "Pluto flyby at 12,500 km after 9.5 years"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

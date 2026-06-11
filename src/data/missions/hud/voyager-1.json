@@ -1,0 +1,86 @@
+{
+  "identity": {
+    "missionName": "Voyager 1",
+    "phases": [
+      {
+        "untilT": 0.18,
+        "label": "JUPITER LEG"
+      },
+      {
+        "untilT": 0.34,
+        "label": "SATURN LEG"
+      },
+      {
+        "untilT": 0.78,
+        "label": "OUTBOUND"
+      },
+      {
+        "untilT": 1.0,
+        "label": "INTERSTELLAR"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "1977-09-05T12:56:00Z",
+    "durationSeconds": 1480000000
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. SUN",
+        "value": "150,809,438 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "43.45 km/s"
+      },
+      {
+        "label": "DIST. EARTH",
+        "value": "8,103 km"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "1977-09-05T12:56:00Z",
+        "detail": "Titan IIIE-Centaur launch from Cape Canaveral"
+      },
+      {
+        "t": 0.18,
+        "label": "JUPITER",
+        "utc": "1979-03-05T12:05:00Z",
+        "detail": "Closest approach, 349,000 km above Jupiter's clouds"
+      },
+      {
+        "t": 0.34,
+        "label": "SATURN",
+        "utc": "1980-11-12T23:46:00Z",
+        "detail": "Saturn and Titan flyby; path bends out of the ecliptic"
+      },
+      {
+        "t": 0.78,
+        "label": "HELIOPSE",
+        "utc": "2012-08-25T00:00:00Z",
+        "detail": "Crosses the heliopause into interstellar space"
+      },
+      {
+        "t": 1,
+        "label": "OUTBOUND",
+        "detail": "Farthest human-made object, still transmitting"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

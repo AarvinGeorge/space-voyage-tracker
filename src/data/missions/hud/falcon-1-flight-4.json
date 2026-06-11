@@ -1,0 +1,69 @@
+{
+  "identity": {
+    "missionName": "Falcon 1 Flight 4",
+    "phases": [
+      {
+        "untilT": 0.2,
+        "label": "LIFTOFF"
+      },
+      {
+        "untilT": 0.6,
+        "label": "ASCENT"
+      },
+      {
+        "untilT": 1.0,
+        "label": "ORBIT"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2008-09-28T23:15:00Z",
+    "durationSeconds": 5560
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "ALTITUDE",
+        "value": "330 x 650 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "7.80 km/s"
+      },
+      {
+        "label": "PERIOD",
+        "value": "94.3 min"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2008-09-28T23:15:00Z",
+        "detail": "Fourth attempt, from Omelek Island, Kwajalein"
+      },
+      {
+        "t": 0.6,
+        "label": "STAGE",
+        "detail": "Stage separation and Kestrel second-stage burn"
+      },
+      {
+        "t": 1,
+        "label": "ORBIT",
+        "detail": "First privately developed liquid-fuel rocket to orbit"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

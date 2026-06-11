@@ -1,0 +1,81 @@
+{
+  "identity": {
+    "missionName": "Chang'e 6",
+    "phases": [
+      {
+        "untilT": 0.35,
+        "label": "OUTBOUND"
+      },
+      {
+        "untilT": 0.5,
+        "label": "SURFACE OPS"
+      },
+      {
+        "untilT": 0.92,
+        "label": "LUNAR ORBIT"
+      },
+      {
+        "untilT": 1.0,
+        "label": "RETURN"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2024-05-03T09:27:00Z",
+    "durationSeconds": 4579200
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. EARTH",
+        "value": "6,378 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "0.44 km/s"
+      },
+      {
+        "label": "ALTITUDE",
+        "value": "0 km"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2024-05-03T09:27:00Z",
+        "detail": "Long March 5 from Wenchang, direct trans-lunar injection"
+      },
+      {
+        "t": 0.35,
+        "label": "LANDING",
+        "utc": "2024-06-01T22:23:00Z",
+        "detail": "Touches down in Apollo crater on the lunar far side"
+      },
+      {
+        "t": 0.5,
+        "label": "ASCENT",
+        "utc": "2024-06-03T23:38:00Z",
+        "detail": "Ascender lifts 1,935 g of far-side samples to orbit"
+      },
+      {
+        "t": 1,
+        "label": "RETURN",
+        "utc": "2024-06-25T06:07:00Z",
+        "detail": "Reentry capsule lands in Inner Mongolia"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

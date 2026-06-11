@@ -1,0 +1,76 @@
+{
+  "identity": {
+    "missionName": "Vostok 1",
+    "phases": [
+      {
+        "untilT": 0.1,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.72,
+        "label": "ORBIT"
+      },
+      {
+        "untilT": 1.0,
+        "label": "REENTRY"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "1961-04-12T06:07:00Z",
+    "durationSeconds": 6480
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "ALTITUDE",
+        "value": "181–327 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "7.84 km/s"
+      },
+      {
+        "label": "PERIOD",
+        "value": "89.1 min"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "1961-04-12T06:07:00Z",
+        "detail": "Gagarin lifts off from Baikonur: 'Poyekhali!'"
+      },
+      {
+        "t": 0.5,
+        "label": "ORBIT",
+        "detail": "First human in space, single orbit of Earth"
+      },
+      {
+        "t": 0.72,
+        "label": "RETRO",
+        "utc": "1961-04-12T07:25:00Z",
+        "detail": "Retrofire over Africa for reentry"
+      },
+      {
+        "t": 1,
+        "label": "LANDING",
+        "utc": "1961-04-12T07:55:00Z",
+        "detail": "Gagarin ejects and parachutes down near Engels"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

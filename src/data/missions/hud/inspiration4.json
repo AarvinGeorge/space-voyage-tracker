@@ -1,0 +1,70 @@
+{
+  "identity": {
+    "missionName": "Inspiration4",
+    "phases": [
+      {
+        "untilT": 0.05,
+        "label": "ASCENT"
+      },
+      {
+        "untilT": 0.95,
+        "label": "ORBIT"
+      },
+      {
+        "untilT": 1.0,
+        "label": "REENTRY"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2021-09-16T00:02:00Z",
+    "durationSeconds": 255600
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "ALTITUDE",
+        "value": "585 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "7.57 km/s"
+      },
+      {
+        "label": "PERIOD",
+        "value": "96.2 min"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2021-09-16T00:02:00Z",
+        "detail": "First all-civilian orbital crew"
+      },
+      {
+        "t": 0.5,
+        "label": "ORBIT",
+        "detail": "Three days at 585 km, above the ISS and Hubble"
+      },
+      {
+        "t": 1,
+        "label": "SPLASH",
+        "utc": "2021-09-18T23:06:00Z",
+        "detail": "Splashdown off the Florida coast"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

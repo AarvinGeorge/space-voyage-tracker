@@ -1,0 +1,74 @@
+{
+  "identity": {
+    "missionName": "Perseverance",
+    "phases": [
+      {
+        "untilT": 0.05,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.95,
+        "label": "CRUISE"
+      },
+      {
+        "untilT": 0.97,
+        "label": "EDL"
+      },
+      {
+        "untilT": 1.0,
+        "label": "SURFACE"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2020-07-30T11:50:00Z",
+    "durationSeconds": 17712000
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. SUN",
+        "value": "151,872,512 km"
+      },
+      {
+        "label": "DIST. EARTH",
+        "value": "9,889 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "36.46 km/s"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2020-07-30T11:50:00Z",
+        "detail": "Atlas V launch with the Ingenuity helicopter"
+      },
+      {
+        "t": 0.95,
+        "label": "EDL",
+        "utc": "2021-02-18T20:55:00Z",
+        "detail": "Sky-crane landing in Jezero Crater"
+      },
+      {
+        "t": 1,
+        "label": "SURFACE",
+        "detail": "Caching samples; Ingenuity makes first powered flight off Earth"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

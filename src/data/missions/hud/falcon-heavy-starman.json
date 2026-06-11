@@ -1,0 +1,73 @@
+{
+  "identity": {
+    "missionName": "Falcon Heavy / Starman",
+    "phases": [
+      {
+        "untilT": 0.1,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.3,
+        "label": "COAST"
+      },
+      {
+        "untilT": 0.7,
+        "label": "ESCAPE"
+      },
+      {
+        "untilT": 1.0,
+        "label": "HELIOCENTRIC"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2018-02-06T20:45:00Z",
+    "durationSeconds": 22000000
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. SUN",
+        "value": "147,552,907 km"
+      },
+      {
+        "label": "DIST. EARTH",
+        "value": "14,357 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "37.78 km/s"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2018-02-06T20:45:00Z",
+        "detail": "Falcon Heavy demo; side boosters land together"
+      },
+      {
+        "t": 0.3,
+        "label": "TMI",
+        "detail": "Third upper-stage burn onto a Mars-crossing orbit"
+      },
+      {
+        "t": 1,
+        "label": "ORBIT",
+        "detail": "Starman and the Roadster in a 1.5-year solar orbit"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "identity": {
+    "missionName": "Apollo 11",
+    "phases": [
+      {
+        "untilT": 0.04,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.42,
+        "label": "OUTBOUND"
+      },
+      {
+        "untilT": 0.55,
+        "label": "LUNAR ORBIT"
+      },
+      {
+        "untilT": 0.65,
+        "label": "SURFACE"
+      },
+      {
+        "untilT": 0.7,
+        "label": "ASCENT"
+      },
+      {
+        "untilT": 1.0,
+        "label": "RETURN"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "1969-07-16T13:32:00Z",
+    "durationSeconds": 703080
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. EARTH",
+        "value": "6,556 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "7.79 km/s"
+      },
+      {
+        "label": "ALTITUDE",
+        "value": "186 km"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "1969-07-16T13:32:00Z",
+        "detail": "Saturn V lifts off from Kennedy LC-39A"
+      },
+      {
+        "t": 0.04,
+        "label": "TLI",
+        "utc": "1969-07-16T16:22:13Z",
+        "detail": "S-IVB trans-lunar injection burn cutoff"
+      },
+      {
+        "t": 0.42,
+        "label": "LOI",
+        "utc": "1969-07-19T17:21:50Z",
+        "detail": "Service propulsion burn into lunar orbit"
+      },
+      {
+        "t": 0.55,
+        "label": "LANDING",
+        "utc": "1969-07-20T20:17:39Z",
+        "detail": "Eagle touches down at Tranquility Base"
+      },
+      {
+        "t": 0.65,
+        "label": "ASCENT",
+        "utc": "1969-07-21T17:54:00Z",
+        "detail": "Ascent stage lifts off the lunar surface"
+      },
+      {
+        "t": 0.7,
+        "label": "TEI",
+        "utc": "1969-07-22T04:55:42Z",
+        "detail": "Trans-Earth injection burn behind the Moon"
+      },
+      {
+        "t": 1,
+        "label": "SPLASH",
+        "utc": "1969-07-24T16:50:35Z",
+        "detail": "Columbia splashes down in the North Pacific"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "identity": {
+    "missionName": "Cassini-Huygens",
+    "phases": [
+      {
+        "untilT": 0.33,
+        "label": "CRUISE"
+      },
+      {
+        "untilT": 0.5,
+        "label": "OUTBOUND"
+      },
+      {
+        "untilT": 0.55,
+        "label": "ARRIVAL"
+      },
+      {
+        "untilT": 0.95,
+        "label": "TOUR"
+      },
+      {
+        "untilT": 1.0,
+        "label": "FINALE"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "1997-10-15T08:43:00Z",
+    "durationSeconds": 628000000
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. SUN",
+        "value": "149,148,980 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "20.07 km/s"
+      },
+      {
+        "label": "DIST. EARTH",
+        "value": "8,930 km"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "1997-10-15T08:43:00Z",
+        "detail": "Titan IVB launch carrying the Huygens probe"
+      },
+      {
+        "t": 0.33,
+        "label": "JUPITER",
+        "utc": "2000-12-30T00:00:00Z",
+        "detail": "Jupiter gravity assist toward Saturn"
+      },
+      {
+        "t": 0.5,
+        "label": "SOI",
+        "utc": "2004-07-01T00:00:00Z",
+        "detail": "Saturn orbit insertion through the ring plane"
+      },
+      {
+        "t": 0.55,
+        "label": "TITAN",
+        "utc": "2005-01-14T00:00:00Z",
+        "detail": "Huygens descends to Titan's surface"
+      },
+      {
+        "t": 1,
+        "label": "FINALE",
+        "utc": "2017-09-15T11:55:00Z",
+        "detail": "Grand Finale plunge into Saturn's atmosphere"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

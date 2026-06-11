@@ -1,0 +1,81 @@
+{
+  "identity": {
+    "missionName": "Crew Dragon Demo-2",
+    "phases": [
+      {
+        "untilT": 0.1,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.5,
+        "label": "RENDEZVOUS"
+      },
+      {
+        "untilT": 0.95,
+        "label": "DOCKED"
+      },
+      {
+        "untilT": 1.0,
+        "label": "RETURN"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2020-05-30T19:22:00Z",
+    "durationSeconds": 5556000
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "ALTITUDE",
+        "value": "420 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "7.66 km/s"
+      },
+      {
+        "label": "PERIOD",
+        "value": "92.9 min"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2020-05-30T19:22:00Z",
+        "detail": "First crewed orbital launch from US soil since 2011"
+      },
+      {
+        "t": 0.5,
+        "label": "DOCK",
+        "utc": "2020-05-31T14:16:00Z",
+        "detail": "Soft capture with the ISS (hard dock 14:27 UTC)"
+      },
+      {
+        "t": 0.9,
+        "label": "UNDOCK",
+        "utc": "2020-08-01T23:35:00Z",
+        "detail": "Endeavour departs the station"
+      },
+      {
+        "t": 1,
+        "label": "SPLASH",
+        "utc": "2020-08-02T18:48:00Z",
+        "detail": "First US crew water landing since 1975"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

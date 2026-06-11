@@ -1,0 +1,81 @@
+{
+  "identity": {
+    "missionName": "Rosetta + Philae",
+    "phases": [
+      {
+        "untilT": 0.05,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.7,
+        "label": "CRUISE"
+      },
+      {
+        "untilT": 0.78,
+        "label": "RENDEZVOUS"
+      },
+      {
+        "untilT": 1.0,
+        "label": "ESCORT"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2004-03-02T07:17:00Z",
+    "durationSeconds": 396000000
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. SUN",
+        "value": "148,285,249 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "37.88 km/s"
+      },
+      {
+        "label": "DIST. EARTH",
+        "value": "6,913 km"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2004-03-02T07:17:00Z",
+        "detail": "Ariane 5 from Kourou"
+      },
+      {
+        "t": 0.7,
+        "label": "RENDEZVS",
+        "utc": "2014-08-06T00:00:00Z",
+        "detail": "Arrives at comet 67P after four gravity assists"
+      },
+      {
+        "t": 0.78,
+        "label": "PHILAE",
+        "utc": "2014-11-12T15:34:00Z",
+        "detail": "Philae makes the first soft landing on a comet"
+      },
+      {
+        "t": 1,
+        "label": "IMPACT",
+        "utc": "2016-09-30T10:39:00Z",
+        "detail": "Controlled descent ends the mission on the comet"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

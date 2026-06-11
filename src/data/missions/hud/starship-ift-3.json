@@ -1,0 +1,71 @@
+{
+  "identity": {
+    "missionName": "Starship IFT-3",
+    "phases": [
+      {
+        "untilT": 0.18,
+        "label": "ASCENT"
+      },
+      {
+        "untilT": 0.95,
+        "label": "COAST"
+      },
+      {
+        "untilT": 1.0,
+        "label": "REENTRY"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2024-03-14T13:25:00Z",
+    "durationSeconds": 2940
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "APOGEE",
+        "value": "234 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "≈26,500 km/h"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2024-03-14T13:25:00Z",
+        "detail": "Booster 10 and Ship 28 from Starbase, Texas"
+      },
+      {
+        "t": 0.06,
+        "label": "STAGESEP",
+        "utc": "2024-03-14T13:27:44Z",
+        "detail": "Hot-staging separation at T+2:44"
+      },
+      {
+        "t": 0.4,
+        "label": "COAST",
+        "detail": "Payload door and propellant-transfer demos in space"
+      },
+      {
+        "t": 1,
+        "label": "REENTRY",
+        "detail": "Telemetry lost at 65 km altitude during reentry"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

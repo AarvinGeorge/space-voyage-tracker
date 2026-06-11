@@ -1,0 +1,74 @@
+{
+  "identity": {
+    "missionName": "Curiosity",
+    "phases": [
+      {
+        "untilT": 0.05,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.95,
+        "label": "CRUISE"
+      },
+      {
+        "untilT": 0.97,
+        "label": "EDL"
+      },
+      {
+        "untilT": 1.0,
+        "label": "SURFACE"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "2011-11-26T15:02:00Z",
+    "durationSeconds": 21945600
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. SUN",
+        "value": "147,652,734 km"
+      },
+      {
+        "label": "DIST. EARTH",
+        "value": "9,884 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "36.25 km/s"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "2011-11-26T15:02:00Z",
+        "detail": "Atlas V 541 launch from Cape Canaveral"
+      },
+      {
+        "t": 0.95,
+        "label": "EDL",
+        "utc": "2012-08-06T05:17:00Z",
+        "detail": "Sky-crane landing in Gale Crater"
+      },
+      {
+        "t": 1,
+        "label": "SURFACE",
+        "detail": "Climbing Mount Sharp since 2012"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}

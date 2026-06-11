@@ -1,0 +1,74 @@
+{
+  "identity": {
+    "missionName": "Mars Pathfinder",
+    "phases": [
+      {
+        "untilT": 0.05,
+        "label": "LAUNCH"
+      },
+      {
+        "untilT": 0.85,
+        "label": "CRUISE"
+      },
+      {
+        "untilT": 0.9,
+        "label": "EDL"
+      },
+      {
+        "untilT": 1.0,
+        "label": "SURFACE"
+      }
+    ]
+  },
+  "elapsed": {
+    "launchUtc": "1996-12-04T06:58:00Z",
+    "durationSeconds": 25660800
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "label": "DIST. SUN",
+        "value": "147,429,938 km"
+      },
+      {
+        "label": "DIST. EARTH",
+        "value": "0 km"
+      },
+      {
+        "label": "VELOCITY",
+        "value": "30.22 km/s"
+      }
+    ],
+    "status": "HISTORIC",
+    "sourceLabel": "TRAJECTORY-DERIVED"
+  },
+  "timeline": {
+    "events": [
+      {
+        "t": 0,
+        "label": "LAUNCH",
+        "utc": "1996-12-04T06:58:00Z",
+        "detail": "Delta II launch from Cape Canaveral"
+      },
+      {
+        "t": 0.85,
+        "label": "EDL",
+        "utc": "1997-07-04T16:57:00Z",
+        "detail": "First airbag-bounce landing on Mars, Ares Vallis"
+      },
+      {
+        "t": 1,
+        "label": "SURFACE",
+        "detail": "Sojourner, the first Mars rover, explores for 83 sols"
+      }
+    ]
+  },
+  "hardware": {
+    "cameraModes": [
+      "PERSPECTIVE",
+      "TOP_DOWN",
+      "FREE"
+    ],
+    "liveFeed": false
+  }
+}
